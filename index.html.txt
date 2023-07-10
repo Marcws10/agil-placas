@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Adicionar Sinal de "-" em Placas</title>
+  <style>
+    .container {
+      width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 10px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+    }
+    
+    button {
+      padding: 5px 10px;
+    }
+    
+    #output {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Adicionar Sinal de "-" em Placas</h1>
+    <div class="form-group">
+      <label for="placa">Placa:</label>
+      <input type="text" id="placa" placeholder="Digite a placa (sem '-')">
+    </div>
+    <button onclick="adicionarSinal()">Alterar</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function adicionarSinal() {
+      var placaInput = document.getElementById('placa');
+      var placa = placaInput.value;
+      
+      if (placa.length >= 2) {
+        var placaComSinal = placa.slice(0, 3) + '-' + placa.slice(3);
+        document.getElementById('output').textContent = 'Placa com sinal: ' + placaComSinal;
+      } else {
+        document.getElementById('output').textContent = 'Placa inválida.';
+      }
+    }
+  </script>
+</body>
+</html>

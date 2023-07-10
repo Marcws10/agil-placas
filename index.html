@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Adicionar Sinal de "-" em Placas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      color: #333333;
+      margin-bottom: 5px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 5px;
+      resize: vertical;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #output {
+      margin-top: 20px;
+      color: #333333;
+    }
+
+    #placasResultado {
+      margin-top: 10px;
+      border: 1px solid #cccccc;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Adicionar Sinal de "-" em Placas</h1>
+    <div class="form-group">
+      <label for="placas">Placas:</label>
+      <textarea id="placas" rows="5"></textarea>
+    </div>
+    <button onclick="adicionarSinal()">Alterar</button>
+    <button onclick="limparPlacas()">Limpar</button>
+    <div id="output"></div>
+    <div id="placasResultado"></div>
+  </div>
+
+  <script>
+    function adicionarSinal() {
+      var placasInput = document.getElementById('placas');
+      var placasTexto = placasInput.value.trim();
+      
+      var placasSeparadas = placasTexto.split('\n');
+      var placasComSinal = [];
+      
+      placasSeparadas.forEach(function(placa) {
+        if (placa.length >= 6) {
+          var primeiraParte = placa.substr(0, 3);
+          var segundaParte = placa.substr(3);
+          var placaComSinal = primeiraParte + '-' + segundaParte;
+          placasComSinal.push(placaComSinal);
+        }
+      });
+      
+      if (placasComSinal.length > 0) {
+        var resultado = 'Placas com sinal:<br>' + placasComSinal.join('<br>');
+       /* document.getElementById('output').innerHTML = resultado;*/
+        document.getElementById('placasResultado').innerHTML = resultado;
+      } else {
+        document.getElementById('output').textContent = 'Nenhuma placa válida encontrada.';
+        document.getElementById('placasResultado').textContent = '';
+      }
+    }
+
+    function limparPlacas() {
+      document.getElementById('placas').value = '';
+      document.getElementById('output').textContent = '';
+      document.getElementById('placasResultado').textContent = '';
+    }
+  </script>
+</body>
+</html>
