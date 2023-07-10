@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Adicionar Sinal de "-" em Placas</title>
+  <title>Comparar Placas</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -59,60 +59,89 @@
       color: #333333;
     }
 
-    #placasResultado {
+    #placasRepetidas,
+    #placasUnicas {
       margin-top: 10px;
       border: 1px solid #cccccc;
       padding: 10px;
       background-color: #f9f9f9;
       border-radius: 4px;
     }
+
+    #placasRepetidas label,
+    #placasUnicas label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    #placasUnicas textarea {
+      width: 100%;
+      padding: 5px;
+      resize: vertical;
+      margin-top: 5px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Adicionar Sinal de "-" em Placas</h1>
+    <h1>Comparar Placas</h1>
     <div class="form-group">
       <label for="placas">Placas:</label>
       <textarea id="placas" rows="5"></textarea>
     </div>
-    <button onclick="adicionarSinal()">Alterar</button>
-    <button onclick="limparPlacas()">Limpar</button>
-    <button onclick="window.location.href= 'comparar.html'">Comparar- Placas</button>
+    <button onclick="compararPlacas()">Comparar</button>
+    <button onclick="window.location.href= 'index.html'">Sinal "-" Placas</button>
     <div id="output"></div>
-    <div id="placasResultado"></div>
+    <div id="placasRepetidas">
+      <label>Placas Repetidas:</label>
+      <div id="repetidasOutput"></div>
+    </div>
+    <div id="placasUnicas">
+      <label>Placas Únicas:</label>
+      <textarea id="unicasOutput" rows="5" readonly></textarea>
+    </div>
   </div>
 
   <script>
-    function adicionarSinal() {
+    function compararPlacas() {
       var placasInput = document.getElementById('placas');
       var placasTexto = placasInput.value.trim();
       
       var placasSeparadas = placasTexto.split('\n');
-      var placasComSinal = [];
+      
+      var placasRepetidas = [];
+      var placasUnicas = [];
+      
+      var placasVerificadas = {};
       
       placasSeparadas.forEach(function(placa) {
         if (placa.length >= 6) {
-          var primeiraParte = placa.substr(0, 3);
-          var segundaParte = placa.substr(3);
-          var placaComSinal = primeiraParte + '-' + segundaParte;
-          placasComSinal.push(placaComSinal);
+          if (placasVerificadas[placa]) {
+            placasRepetidas.push(placa);
+          } else {
+            placasVerificadas[placa] = true;
+            placasUnicas.push(placa);
+          }
         }
       });
       
-      if (placasComSinal.length > 0) {
-        var resultado = 'Placas com sinal:<br>' + placasComSinal.join('<br>');
-       /* document.getElementById('output').innerHTML = resultado;*/
-        document.getElementById('placasResultado').innerHTML = resultado;
+      var repetidasOutput = '';
+      var unicasOutput = '';
+      
+      if (placasRepetidas.length > 0) {
+        repetidasOutput = placasRepetidas.join(', ');
       } else {
-        document.getElementById('output').textContent = 'Nenhuma placa válida encontrada.';
-        document.getElementById('placasResultado').textContent = '';
+        repetidasOutput = 'Nenhuma placa repetida encontrada.';
       }
-    }
-
-    function limparPlacas() {
-      document.getElementById('placas').value = '';
-      document.getElementById('output').textContent = '';
-      document.getElementById('placasResultado').textContent = '';
+      
+      if (placasUnicas.length > 0) {
+        unicasOutput = placasUnicas.join('\n');
+      } else {
+        unicasOutput = 'Nenhuma placa única encontrada.';
+      }
+      
+      document.getElementById('repetidasOutput').textContent = repetidasOutput;
+      document.getElementById('unicasOutput').value = unicasOutput;
     }
   </script>
 </body>
