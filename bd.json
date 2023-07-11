@@ -1,0 +1,20 @@
+{
+    "cadastros": [
+        {
+            "login": "marcos.cruz",
+            "senha": "123"
+        },
+        {
+            "login": "marcos.cruz",
+            "senha": "123"
+        },
+        {
+            "login": "marcos.cruz",
+            "senha": "123"
+        },
+        {
+            "login": "marcos.cruz",
+            "senha": "123"
+        }
+    ]
+}
