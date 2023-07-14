@@ -1,118 +1,95 @@
 <!DOCTYPE html>
 <html>
+  <meta name="google-signin-client_id" content="SEU_ID_DO_CLIENTE">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 <head>
-  <title>Adicionar Sinal de "-" em Placas</title>
+  <title>Tela de Login</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-    }
-
     .container {
-      width: 400px;
+      position: relative;
+      width: 300px;
       margin: 0 auto;
+      top: 200px;
       padding: 20px;
-      background-color: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    h2{
+        text-align: center;
+    }
+    input{
+        width: 18.2rem;
+        height: 2rem;
+        border-radius: 8px;
+        border: 1px solid;
     }
 
-    h1 {
-      color: #333333;
-      text-align: center;
-      margin-bottom: 20px;
+    
+    .botaoAcessar{
+        align-items: center;
+        width: 100%;
+        color: white;
+        height: 3rem;
+        background: #4caf50;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+        transition: color 9s, background-color 0.1s;
     }
-
-    .form-group {
-      margin-bottom: 20px;
+    .botaoAcessar:hover{
+        background: #45a049;
+        font-size: 1rem;
     }
-
-    label {
-      display: block;
-      color: #333333;
-      margin-bottom: 5px;
-    }
-
-    textarea {
-      width: 100%;
-      padding: 5px;
-      resize: vertical;
-    }
-
-    button {
-      padding: 8px 16px;
-      background-color: #4caf50;
-      color: #ffffff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-right: 10px;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    #output {
-      margin-top: 20px;
-      color: #333333;
-    }
-
-    #placasResultado {
-      margin-top: 10px;
-      border: 1px solid #cccccc;
-      padding: 10px;
-      background-color: #f9f9f9;
-      border-radius: 4px;
-    }
+    
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Adicionar Sinal de "-" em Placas</h1>
-    <div class="form-group">
-      <label for="placas">Placas:</label>
-      <textarea id="placas" rows="5"></textarea>
-    </div>
-    <button onclick="adicionarSinal()">Alterar</button>
-    <button onclick="limparPlacas()">Limpar</button>
-    <button onclick="window.location.href= 'comp.html'">Comparar- Placas</button>
-    <div id="output"></div>
-    <div id="placasResultado"></div>
+    <h2>Tela de Login</h2>
+    <form>
+      <label for="username">Nome de Usuário:</label>
+      <input type="text" id="username" >
+      
+      <label for="password">Senha:</label>
+      <input type="password" id="password" maxlength="6"><br> <br>
+      
+      <!-- <input class="botaoAcessar" type="submit" value="ACESSAR" onclick="login()"> -->
+      <button class="botaoAcessar" onclick="login(); return false;" >ACESSAR</button>
+    </form>
   </div>
+  <!-- function login() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
 
-  <script>
-    function adicionarSinal() {
-      var placasInput = document.getElementById('placas');
-      var placasTexto = placasInput.value.trim();
-      
-      var placasSeparadas = placasTexto.split('\n');
-      var placasComSinal = [];
-      
-      placasSeparadas.forEach(function(placa) {
-        if (placa.length >= 6) {
-          var primeiraParte = placa.substr(0, 3);
-          var segundaParte = placa.substr(3);
-          var placaComSinal = primeiraParte + '-' + segundaParte;
-          placasComSinal.push(placaComSinal);
-        }
-      });
-      
-      if (placasComSinal.length > 0) {
-        var resultado = 'Placas com sinal:<br>' + placasComSinal.join('<br>');
-       /* document.getElementById('output').innerHTML = resultado;*/
-        document.getElementById('placasResultado').innerHTML = resultado;
-      } else {
-        document.getElementById('output').textContent = 'Nenhuma placa válida encontrada.';
-        document.getElementById('placasResultado').textContent = '';
-      }
+    // Lógica de autenticação com usuário e senha fixos
+    var usuarioCorreto = "usuario";
+    var senhaCorreta = "senha";
+
+    if (username === usuarioCorreto && password === senhaCorreta) {
+      alert("Login bem-sucedido!");
+      // Aqui você pode redirecionar o usuário para outra página ou realizar outras ações desejadas
+    } else {
+      alert("Nome de usuário ou senha incorretos!");
     }
+  } -->
+  <script>   
+    function login() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
 
-    function limparPlacas() {
-      document.getElementById('placas').value = '';
-      document.getElementById('output').textContent = '';
-      document.getElementById('placasResultado').textContent = '';
+      // Lógica de autenticação com usuário e senha fixos
+      var usuarioCorreto = "marcos.cruz";
+      var senhaCorreta = "123";
+
+      if (username === usuarioCorreto && password === senhaCorreta) {
+        alert("Login bem-sucedido!");
+        location.href = "Sinal.html";
+                
+      }     
+      else{
+        alert("Login nao cadastrado em nossa base de dados!")
+      }     
+      
     }
   </script>
 </body>

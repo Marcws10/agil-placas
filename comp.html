@@ -7,9 +7,58 @@
       font-family: Arial, sans-serif;
       background-color: #f2f2f2;
     }
-
+    .menu { background-color: #282828; }
+        .menu ul {
+            margin: 0;
+            padding: 0;
+            font-size: 0;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        .menu ul li {
+            display: inline-block;
+            vertical-align: top;
+        }
+        .menu ul li a {
+            font-family: 'open_sansregular';
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 15px;
+            color: #fff;
+            display: block;
+            line-height: 50px;
+            padding: 0 35px;
+            letter-spacing: 3px;
+            position: relative;
+        }
+        .menu ul li a:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #4caf50;
+            color: #ccc;
+            z-index: -1;
+            transform: skewX(-35deg);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .menu ul li:hover a,
+        .menu ul li:focus a,
+        .menu ul li.active a {
+            color: #282828;
+        }
+        .menu ul li:hover a:after,
+        .menu ul li:focus a:after,
+        .menu ul li.active a:after {
+            opacity: 1;
+        }
     .container {
       width: 800px;
+      top: 150px;
       margin: 0 auto;
       padding: 20px;
       background-color: #ffffff;
@@ -87,19 +136,30 @@
   </style>
 </head>
 <body>
+
+  <nav class="menu">
+    <ul>
+        <li><a href="#" title="Home">Home</a></li>
+        <li><a onclick="window.location.href='Comp.html'" title="Html">Html</a></li>
+        <li><a onclick="window.location.href='Sinal.html'" title="Css">Colocar Sinal</a></li>
+        <li class="active"><a   title="Comparar">Comparar Placas</a></li>
+    </ul>
+        
+  </nav>
+
   <div class="container">
     <div class="column">
       <h1>Placas Antigas</h1>
       <div class="form-group">
         <label for="placasAntigas">Placas Planilha de Placas Antigas:</label>
-        <textarea id="placasAntigas" rows="5"></textarea>
+        <textarea id="placasNovas" rows="5"></textarea>  <!-- <textarea id="placasAntigas" rows="5"></textarea> -->
       </div>
     </div>
     <div class="column">
       <h1>Placas Novas</h1>
       <div class="form-group">
         <label for="placasNovas">Placas Planilha de Placas Novas:</label>
-        <textarea id="placasNovas" rows="5"></textarea>
+        <textarea id="placasAntigas" rows="5"></textarea>   <!-- <textarea id="placasNovas" rows="5"></textarea> -->
       </div>
     </div>
     <div class="column">
@@ -109,16 +169,16 @@
           <label>Placas Repetidas:</label>
           <textarea id="repetidasOutput" rows="5" readonly></textarea>
         </div>
-        <div id="uniaoPlacas">
-          <label>Placas União:</label>
-          <textarea id="uniaoOutput" rows="5" readonly></textarea>
+        <div id="placasNaoRepetidas">
+          <label>Placas Não Repetidas:</label>
+          <textarea id="naoRepetidasOutput" rows="5" readonly></textarea>
         </div>
       </div>
     </div>
   </div>
   <div class="container">
     <button onclick="compararPlacas()">Comparar</button>
-    <button onclick="window.location.href= 'index.html'">Sinal "-" Placas</button>
+    <button onclick="limparPlacas()">Limpar</button>
   </div>
 
   <script>
@@ -133,18 +193,18 @@
       var placasNovasSeparadas = placasNovasTexto.split('\n');
       
       var placasRepetidas = [];
-      var placasUniao = [];
+      var placasNaoRepetidas = [];
       
       placasAntigasSeparadas.forEach(function(placaAntiga) {
         if (placasNovasSeparadas.includes(placaAntiga)) {
           placasRepetidas.push(placaAntiga);
+        } else {
+          placasNaoRepetidas.push(placaAntiga);
         }
       });
       
-      placasUniao = placasAntigasSeparadas.concat(placasNovasSeparadas);
-      
       var repetidasOutput = '';
-      var uniaoOutput = '';
+      var naoRepetidasOutput = '';
       
       if (placasRepetidas.length > 0) {
         repetidasOutput = placasRepetidas.join('\n');
@@ -152,14 +212,21 @@
         repetidasOutput = 'Nenhuma placa repetida encontrada.';
       }
       
-      if (placasUniao.length > 0) {
-        uniaoOutput = [...new Set(placasUniao)].join('\n');
+      if (placasNaoRepetidas.length > 0) {
+        naoRepetidasOutput = placasNaoRepetidas.join('\n');
       } else {
-        uniaoOutput = 'Nenhuma placa encontrada.';
+        naoRepetidasOutput = 'Todas as placas são repetidas.';
       }
       
       document.getElementById('repetidasOutput').value = repetidasOutput;
-      document.getElementById('uniaoOutput').value = uniaoOutput;
+      document.getElementById('naoRepetidasOutput').value = naoRepetidasOutput;
+    }
+  
+    function limparPlacas() {
+      document.getElementById('placasNovas').value='';
+      document.getElementById('placasAntigas').value='';
+      document.getElementById('repetidasOutput').value='';
+      document.getElementById('naoRepetidasOutput').value='';
     }
   </script>
 </body>
