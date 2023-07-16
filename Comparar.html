@@ -7,55 +7,56 @@
       font-family: Arial, sans-serif;
       background-color: #f2f2f2;
     }
-    .menu { background-color: #282828; }
-        .menu ul {
-            margin: 0;
-            padding: 0;
-            font-size: 0;
-            position: relative;
-            z-index: 1;
-            text-align: center;
-        }
-        .menu ul li {
-            display: inline-block;
-            vertical-align: top;
-        }
-        .menu ul li a {
-            font-family: 'open_sansregular';
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 15px;
-            color: #fff;
-            display: block;
-            line-height: 50px;
-            padding: 0 35px;
-            letter-spacing: 3px;
-            position: relative;
-        }
-        .menu ul li a:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #4caf50;
-            color: #ccc;
-            z-index: -1;
-            transform: skewX(-35deg);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .menu ul li:hover a,
-        .menu ul li:focus a,
-        .menu ul li.active a {
-            color: #282828;
-        }
-        .menu ul li:hover a:after,
-        .menu ul li:focus a:after,
-        .menu ul li.active a:after {
-            opacity: 1;
-        }
+    :focus{
+      outline: transparent;
+      box-shadow: 0 0 0 2px color #4caf50;
+    }
+    nav {
+      background-color: #333;
+      padding: 1px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      color: #fff;
+      font-size: 24px;
+    }
+    .menu {
+      background-color: #282828;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+    }
+
+    .menu ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu ul li {
+      display: inline-block;
+    }
+
+    .menu ul li a {
+      text-decoration: none;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 15px;
+    }
+
+    .menu ul li a:hover,
+    .menu ul li.active a {
+      background-color: #4caf50;
+      color: #282828;
+      cursor: pointer;
+    }
+
     .container {
       width: 800px;
       top: 150px;
@@ -138,6 +139,7 @@
 <body>
 
   <nav class="menu">
+    <div class="logo"><img src="/img/logo.png" width="33" alt=""></div>
     <ul>
         <li><a href="#" title="pgHome">Home</a></li>
         <li><a href="#"  title="pgSobre">Sobre </a></li>
